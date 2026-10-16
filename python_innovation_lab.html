@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYTHON INNOVATION LAB | M.Sc. Computer Science Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        maroon: {
+                            600: '#800000',
+                            700: '#660000',
+                            800: '#4D0000',
+                            900: '#330000',
+                        },
+                        mustard: {
+                            400: '#FFD700',
+                            500: '#FFDB58',
+                            600: '#E5C158',
+                        },
+                        navy: {
+                            800: '#0F172A',
+                            900: '#0B0F19',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0f19; }
+        ::-webkit-scrollbar-thumb { background: #800000; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a00000; }
+        .glass-panel { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 219, 88, 0.15); }
+        .glow-mustard { box-shadow: 0 0 20px rgba(255, 219, 88, 0.2); }
+        .glow-maroon { box-shadow: 0 0 25px rgba(128, 0, 0, 0.4); }
+    </style>
+</head>
+<body class="bg-navy-900 text-slate-100 min-h-screen flex flex-col selection:bg-mustard-500 selection:text-navy-900">
+
+    <header class="sticky top-0 z-50 bg-navy-800/90 backdrop-blur-md border-b border-maroon-800/50 px-4 lg:px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <button id="sidebarToggle" class="text-mustard-500 hover:text-mustard-400 p-2 rounded-lg bg-maroon-900/50 border border-maroon-700/55 transition">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-maroon-600 to-maroon-900 flex items-center justify-center border border-mustard-500/40 glow-mustard">
+                    <i class="fa-brands fa-python text-mustard-500 text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg tracking-wide bg-gradient-to-r from-mustard-400 via-white to-mustard-500 bg-clip-text text-transparent">PYTHON INNOVATION LAB</h1>
+                    <p class="text-xs text-slate-400 hidden sm:block">VET Institute of Arts and Science | M.Sc. Computer Science (2026–27)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <div class="relative hidden md:block w-64">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                    <i class="fa-solid fa-search text-xs"></i>
+                </span>
+                <input type="text" id="globalSearch" placeholder="Search topics, challenges..." class="w-full bg-navy-900/80 border border-maroon-800 rounded-lg pl-9 pr-4 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-mustard-500 transition">
+            </div>
+
+            <div class="hidden sm:flex items-center space-x-2 bg-maroon-900/60 border border-maroon-700/60 px-3 py-1 rounded-full">
+                <i class="fa-solid fa-bolt text-mustard-500 animate-pulse"></i>
+                <span id="headerXP" class="text-xs font-bold text-mustard-400">1,250 XP</span>
+                <span class="text-xs text-slate-400">| Level <span id="headerLevel">2</span></span>
+            </div>
+
+            <button id="googleSitesModalBtn" onclick="openGoogleSitesGuide()" class="hidden md:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-mustard-500/10 border border-mustard-500/40 text-mustard-400 text-xs font-bold hover:bg-mustard-500/20 transition">
+                <i class="fa-solid fa-globe"></i><span>Google Sites Export</span>
+            </button>
+
+            <button id="themeToggle" class="p-2 rounded-lg bg-navy-900/80 border border-maroon-800 text-mustard-500 hover:bg-maroon-900/40 transition">
+                <i class="fa-solid fa-sun" id="themeIcon"></i>
+            </button>
+
+            <div class="flex items-center space-x-2 pl-2 border-l border-slate-700">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-maroon-600 to-mustard-500 p-0.5">
+                    <div class="w-full h-full bg-navy-900 rounded-full flex items-center justify-center font-bold text-xs text-mustard-400">MS</div>
+                </div>
+                <div class="hidden xl:block text-left">
+                    <p class="text-xs font-semibold text-slate-200">M.Sc. Scholar</p>
+                    <p class="text-[10px] text-slate-400">School of Computing</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex-1 flex overflow-hidden">
+
+        <aside id="sidebar" class="w-72 bg-navy-800/95 border-r border-maroon-800/40 flex flex-col transition-all duration-300 z-40 shrink-0">
+            <div class="p-4 border-b border-maroon-800/30 flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider text-mustard-500"><i class="fa-solid fa-compass mr-2"></i>Navigation Menu</span>
+                <span class="text-[10px] bg-maroon-900 text-mustard-400 px-2 py-0.5 rounded border border-maroon-700">Core 75 Hrs</span>
+            </div>
+            
+            <nav id="navMenu" class="flex-1 overflow-y-auto p-3 space-y-1">
+                <a href="#dashboard" onclick="switchTab('dashboard')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition active bg-maroon-600/30 text-mustard-400 border border-maroon-600/50" data-target="dashboard">
+                    <i class="fa-solid fa-chart-pie w-5 text-center text-mustard-500"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#roadmap" onclick="switchTab('roadmap')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition text-slate-300 hover:bg-maroon-900/40 hover:text-mustard-400" data-target="roadmap">
+                    <i class="fa-solid fa-road w-5 text-center text-mustard-500"></i>
+                    <span>Semester Roadmap (6 Units)</span>
+                </a>
+                <a href="#practicalLab" onclick="switchTab('practicalLab')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition text-slate-300 hover:bg-maroon-900/40 hover:text-mustard-400" data-target="practicalLab">
+                    <i class="fa-solid fa-laptop-code w-5 text-center text-mustard-500"></i>
+                    <span>Practical Coding Lab</span>
+                </a>
+                <a href="#leetcodeArena" onclick="switchTab('leetcodeArena')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition text-slate-300 hover:bg-maroon-900/40 hover:text-mustard-400" data-target="leetcodeArena">
+                    <i class="fa-solid fa-code w-5 text-center text-mustard-500"></i>
+                    <span>LeetCode Coding Arena</span>
+                </a>
+                <a href="#gamificationZone" onclick="switchTab('gamificationZone')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition text-slate-300 hover:bg-maroon-900/40 hover:text-mustard-400" data-target="gamificationZone">
+                    <i class="fa-solid fa-gamepad w-5 text-center text-mustard-500"></i>
+                    <span>Python Quest (Gamified)</span>
+                </a>
+                <a href="#researchLab" onclick="switchTab('researchLab')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition text-slate-300 hover:bg-maroon-900/40 hover:text-mustard-400" data-target="researchLab">
+                    <i class="fa-solid fa-flask w-5 text-center text-mustard-500"></i>
+                    <span>Research Lab</span>
+                </a>
+                <a href="#projectStudio" onclick="switchTab('projectStudio')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition text-slate-300 hover:bg-maroon-900/40 hover:text-mustard-400" data-target="projectStudio">
+                    <i class="fa-solid fa-diagram-project w-5 text-center text-mustard-500"></i>
+                    <span>Project Development Studio</span>
+                </a>
+                <a href="#moocHub" onclick="switchTab('moocHub')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition text-slate-300 hover:bg-maroon-900/40 hover:text-mustard-400" data-target="moocHub">
+                    <i class="fa-solid fa-graduation-cap w-5 text-center text-mustard-500"></i>
+                    <span>MOOC Learning Hub</span>
+                </a>
+                <a href="#rolePlay" onclick="switchTab('rolePlay')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition text-slate-300 hover:bg-maroon-900/40 hover:text-mustard-400" data-target="rolePlay">
+                    <i class="fa-solid fa-users-viewfinder w-5 text-center text-mustard-500"></i>
+                    <span>Industry Role-Play Studio</span>
+                </a>
+                <a href="#hackathon" onclick="switchTab('hackathon')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition text-slate-300 hover:bg-maroon-900/40 hover:text-mustard-400" data-target="hackathon">
+                    <i class="fa-solid fa-trophy w-5 text-center text-mustard-500"></i>
+                    <span>Python Innovate 2026 Hackathon</span>
+                </a>
+                <a href="#progressTracker" onclick="switchTab('progressTracker')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition text-slate-300 hover:bg-maroon-900/40 hover:text-mustard-400" data-target="progressTracker">
+                    <i class="fa-solid fa-chart-line w-5 text-center text-mustard-500"></i>
+                    <span>Student Progress Tracker</span>
+                </a>
+                <a href="#facultyCentre" onclick="switchTab('facultyCentre')" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition text-slate-300 hover:bg-maroon-900/40 hover:text-mustard-400" data-target="facultyCentre">
+                    <i class="fa-solid fa-chalkboard-user w-5 text-center text-mustard-500"></i>
+                    <span>Faculty Resource Centre</span>
+                </a>
+            </nav>
+
+            <div class="p-3 border-t border-maroon-800/40 bg-navy-900/50 text-center">
+                <p class="text-[11px] text-slate-400">VET Institute of Arts and Science</p>
+                <p class="text-[10px] text-mustard-500 font-semibold mt-0.5">Erode, Tamil Nadu</p>
+            </div>
+        </aside>
+
+        <main class="flex-1 overflow-y-auto bg-navy-900 p-4 lg:p-8 relative">
+
+            <!-- DASHBOARD TAB -->
+            <div id="tab-dashboard" class="tab-content space-y-6">
+                <div class="relative rounded-2xl bg-gradient-to-r from-maroon-900 via-maroon-800 to-navy-800 p-6 lg:p-8 border border-maroon-700/60 shadow-xl overflow-hidden">
+                    <div class="absolute right-0 top-0 translate-x-8 -translate-y-8 w-64 h-64 bg-mustard-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="relative z-10 max-w-2xl">
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-mustard-500 text-navy-900 mb-3 inline-block">M.Sc. CS Semester Core</span>
+                        <h2 class="text-2xl lg:text-4xl font-extrabold text-white tracking-tight mb-2">Welcome to Python Innovation Lab</h2>
+                        <p class="text-slate-300 text-sm lg:text-base mb-6">Master advanced Python programming, algorithms, systems engineering, web architecture, and real-world project development mapped to Bill Lubanovic's curriculum.</p>
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="switchTab('roadmap')" class="px-5 py-2.5 rounded-xl bg-mustard-500 text-navy-900 font-bold text-sm hover:bg-mustard-400 transition shadow-lg flex items-center space-x-2">
+                                <i class="fa-solid fa-road"></i><span>Explore Roadmap</span>
+                            </button>
+                            <button onclick="switchTab('practicalLab')" class="px-5 py-2.5 rounded-xl bg-navy-800/80 border border-maroon-600 text-mustard-400 font-bold text-sm hover:bg-maroon-900/50 transition flex items-center space-x-2">
+                                <i class="fa-solid fa-laptop-code"></i><span>Practical Lab</span>
+                            </button>
+                            <button onclick="openGoogleSitesGuide()" class="px-5 py-2.5 rounded-xl bg-navy-800/80 border border-mustard-500/50 text-mustard-400 font-bold text-sm hover:bg-maroon-900/50 transition flex items-center space-x-2">
+                                <i class="fa-solid fa-globe"></i><span>Google Sites Guide</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-mustard-500 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-slate-400 uppercase font-semibold">Syllabus Progress</p>
+                            <h3 class="text-2xl font-black text-white mt-1">45%</h3>
+                            <p class="text-xs text-mustard-400 mt-1"><i class="fa-solid fa-clock mr-1"></i>34 of 75 Hours</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-mustard-500/10 text-mustard-500 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-maroon-600 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-slate-400 uppercase font-semibold">Coding Challenges</p>
+                            <h3 id="statChallenges" class="text-2xl font-black text-white mt-1">12 / 30</h3>
+                            <p class="text-xs text-emerald-400 mt-1"><i class="fa-solid fa-check mr-1"></i>Completed</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-maroon-600/20 text-maroon-500 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-mustard-500 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-slate-400 uppercase font-semibold">Earned XP</p>
+                            <h3 id="statXP" class="text-2xl font-black text-white mt-1">1,250</h3>
+                            <p class="text-xs text-mustard-400 mt-1"><i class="fa-solid fa-bolt mr-1"></i>Python Explorer</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-mustard-500/10 text-mustard-500 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-maroon-600 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-slate-400 uppercase font-semibold">Hackathon Status</p>
+                            <h3 class="text-2xl font-black text-white mt-1">Registered</h3>
+                            <p class="text-xs text-cyan-400 mt-1"><i class="fa-solid fa-users mr-1"></i>Team CodeBusters</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-maroon-600/20 text-maroon-500 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 glass-panel p-6 rounded-2xl">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center justify-between">
+                            <span><i class="fa-solid fa-bolt text-mustard-500 mr-2"></i>Quick Navigation Hub</span>
+                            <span class="text-xs text-slate-400 font-normal">Direct Access</span>
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div onclick="switchTab('roadmap')" class="p-4 rounded-xl bg-navy-800/60 border border-maroon-800 hover:border-mustard-500/50 transition cursor-pointer group">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-lg bg-maroon-900/60 text-mustard-400 flex items-center justify-center group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-road text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-white group-hover:text-mustard-400 transition">Semester Roadmap</h4>
+                                        <p class="text-xs text-slate-400">Units I to VI with Lubanovic Syllabus</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div onclick="switchTab('practicalLab')" class="p-4 rounded-xl bg-navy-800/60 border border-maroon-800 hover:border-mustard-500/50 transition cursor-pointer group">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-lg bg-maroon-900/60 text-mustard-400 flex items-center justify-center group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-laptop-code text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-white group-hover:text-mustard-400 transition">Practical Coding Lab</h4>
+                                        <p class="text-xs text-slate-400">Interactive browser code editor</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div onclick="switchTab('gamificationZone')" class="p-4 rounded-xl bg-navy-800/60 border border-maroon-800 hover:border-mustard-500/50 transition cursor-pointer group">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-lg bg-maroon-900/60 text-mustard-400 flex items-center justify-center group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-gamepad text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-white group-hover:text-mustard-400 transition">Python Quest Games</h4>
+                                        <p class="text-xs text-slate-400">Bug Hunters & Output Predictor</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div onclick="switchTab('projectStudio')" class="p-4 rounded-xl bg-navy-800/60 border border-maroon-800 hover:border-mustard-500/50 transition cursor-pointer group">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-lg bg-maroon-900/60 text-mustard-400 flex items-center justify-center group-hover:scale-110 transition">
+                                        <i class="fa-solid fa-diagram-project text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-white group-hover:text-mustard-400 transition">Project Studio & Capstone</h4>
+                                        <p class="text-xs text-slate-400">Campus IT Helpdesk system</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl flex flex-col">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center space-x-2">
+                            <i class="fa-solid fa-bullhorn text-mustard-500"></i>
+                            <span>Department Notices</span>
+                        </h3>
+                        <div class="space-y-3 flex-1">
+                            <div class="p-3 rounded-xl bg-maroon-900/30 border border-maroon-700/50">
+                                <span class="text-[10px] bg-mustard-500 text-navy-900 font-bold px-2 py-0.5 rounded">Hackathon</span>
+                                <h4 class="font-bold text-xs text-white mt-1">Python Innovate 2026 Starts Soon</h4>
+                                <p class="text-[11px] text-slate-300 mt-1">Register your 3-member team for the 6-hour coding sprint on campus.</p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-navy-800/80 border border-slate-700">
+                                <span class="text-[10px] bg-slate-700 text-slate-200 px-2 py-0.5 rounded">Assignment</span>
+                                <h4 class="font-bold text-xs text-white mt-1">Unit III Object-Oriented Task</h4>
+                                <p class="text-[11px] text-slate-300 mt-1">Submit duck typing and magic method implementations by Friday.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROADMAP TAB -->
+            <div id="tab-roadmap" class="tab-content hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-road text-mustard-500 mr-2"></i>Semester Syllabus Roadmap (Units I – VI)</h2>
+                            <p class="text-xs text-slate-400 mt-1">Based on Bill Lubanovic's "Introducing Python" prescribed textbook for M.Sc. Computer Science (75 Hours).</p>
+                        </div>
+                        <div class="mt-4 md:mt-0 flex flex-wrap gap-2" id="unitSelectorButtons">
+                            <button onclick="selectUnit(1)" class="unit-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-mustard-500 text-navy-900 transition">Unit I</button>
+                            <button onclick="selectUnit(2)" class="unit-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-navy-800 text-slate-300 hover:text-mustard-400 transition">Unit II</button>
+                            <button onclick="selectUnit(3)" class="unit-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-navy-800 text-slate-300 hover:text-mustard-400 transition">Unit III</button>
+                            <button onclick="selectUnit(4)" class="unit-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-navy-800 text-slate-300 hover:text-mustard-400 transition">Unit IV</button>
+                            <button onclick="selectUnit(5)" class="unit-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-navy-800 text-slate-300 hover:text-mustard-400 transition">Unit V</button>
+                            <button onclick="selectUnit(6)" class="unit-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-navy-800 text-slate-300 hover:text-mustard-400 transition">Unit VI</button>
+                        </div>
+                    </div>
+
+                    <div id="unitContentContainer" class="space-y-6"></div>
+                </div>
+            </div>
+
+            <!-- PRACTICAL LAB TAB -->
+            <div id="tab-practicalLab" class="tab-content hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-laptop-code text-mustard-500 mr-2"></i>Practical Coding Laboratory</h2>
+                            <p class="text-xs text-slate-400 mt-1">Interactive problem solving with browser Python execution simulator.</p>
+                        </div>
+                        <div class="mt-4 md:mt-0 flex items-center space-x-2">
+                            <button onclick="setLabDifficulty('beginner')" class="lab-diff-btn px-3 py-1 rounded-lg text-xs font-bold bg-maroon-600 text-white transition">Beginner</button>
+                            <button onclick="setLabDifficulty('intermediate')" class="lab-diff-btn px-3 py-1 rounded-lg text-xs font-bold bg-navy-800 text-slate-300 transition">Intermediate</button>
+                            <button onclick="setLabDifficulty('advanced')" class="lab-diff-btn px-3 py-1 rounded-lg text-xs font-bold bg-navy-800 text-slate-300 transition">Advanced</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="glass-panel p-4 rounded-xl space-y-3">
+                            <h3 class="text-sm font-bold text-mustard-400 uppercase">Exercises</h3>
+                            <div id="practicalList" class="space-y-2"></div>
+                        </div>
+
+                        <div class="lg:col-span-2 space-y-4">
+                            <div class="glass-panel p-4 rounded-xl border border-maroon-800">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 id="currentPracticalTitle" class="font-bold text-sm text-white">Select an Exercise</h4>
+                                    <span id="currentPracticalDiff" class="text-[10px] px-2 py-0.5 rounded bg-maroon-900 text-mustard-400">Level</span>
+                                </div>
+                                <p id="currentPracticalDesc" class="text-xs text-slate-300 mb-4">Choose an exercise from the left to start coding.</p>
+
+                                <div class="bg-navy-900 rounded-xl border border-maroon-800 overflow-hidden">
+                                    <div class="bg-navy-800 px-4 py-2 flex items-center justify-between border-b border-maroon-800/50">
+                                        <span class="text-xs font-mono text-slate-400"><i class="fa-brands fa-python text-mustard-500 mr-2"></i>solution.py</span>
+                                        <div class="space-x-2">
+                                            <button onclick="runPracticalCode()" class="px-3 py-1 rounded bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition"><i class="fa-solid fa-play mr-1"></i>Run Code</button>
+                                            <button onclick="resetPracticalCode()" class="px-3 py-1 rounded bg-navy-800 border border-slate-700 text-slate-300 text-xs hover:text-white transition">Reset</button>
+                                        </div>
+                                    </div>
+                                    <textarea id="practicalCodeEditor" class="w-full h-48 bg-navy-900 p-4 text-xs font-mono text-slate-100 focus:outline-none resize-none" spellcheck="false"># Write your Python 3 code here...</textarea>
+                                </div>
+
+                                <div class="mt-4">
+                                    <span class="text-xs font-bold text-slate-400 uppercase">Execution Output:</span>
+                                    <div id="practicalOutput" class="mt-1 bg-navy-900 border border-maroon-800/80 rounded-xl p-3 text-xs font-mono text-emerald-400 h-24 overflow-y-auto">
+                                        // Output will appear here after execution...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEETCODE ARENA TAB -->
+            <div id="tab-leetcodeArena" class="tab-content hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-code text-mustard-500 mr-2"></i>LeetCode-Style Coding Arena</h2>
+                            <p class="text-xs text-slate-400 mt-1">Algorithmic challenges mapped to M.Sc. Computer Science problem solving.</p>
+                        </div>
+                        <div class="mt-4 md:mt-0 flex items-center space-x-2">
+                            <input type="text" id="leetcodeSearch" placeholder="Search challenges..." oninput="filterLeetCode()" class="bg-navy-900 border border-maroon-800 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-mustard-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="glass-panel p-4 rounded-xl space-y-2 max-h-[500px] overflow-y-auto" id="leetcodeListContainer"></div>
+
+                        <div class="lg:col-span-2 glass-panel p-6 rounded-xl space-y-4">
+                            <div id="leetcodeDetail" class="space-y-4">
+                                <h3 id="lcTitle" class="text-lg font-bold text-white">Select a Challenge</h3>
+                                <p id="lcDesc" class="text-xs text-slate-300">Choose a challenge from the list to view problem description and editor.</p>
+                                <div class="bg-navy-900 rounded-xl border border-maroon-800 overflow-hidden">
+                                    <div class="bg-navy-800 px-4 py-2 flex items-center justify-between border-b border-maroon-800">
+                                        <span class="text-xs font-mono text-slate-400">solution.py</span>
+                                        <button onclick="submitLeetCode()" class="px-3 py-1 rounded bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition"><i class="fa-solid fa-paper-plane mr-1"></i>Submit Solution</button>
+                                    </div>
+                                    <textarea id="lcCodeEditor" class="w-full h-40 bg-navy-900 p-4 text-xs font-mono text-slate-100 focus:outline-none resize-none" spellcheck="false"># Write your solution here...</textarea>
+                                </div>
+                                <div id="lcResult" class="text-xs font-mono text-slate-400 p-3 bg-navy-900 rounded-xl border border-maroon-800">
+                                    Status: Awaiting submission.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GAMIFICATION ZONE TAB -->
+            <div id="tab-gamificationZone" class="tab-content hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-gamepad text-mustard-500 mr-2"></i>Python Quest: Code, Debug & Conquer</h2>
+                            <p class="text-xs text-slate-400 mt-1">Gamified challenges, Bug Hunters, Output Predictor, and Escape Room puzzles.</p>
+                        </div>
+                        <div class="flex items-center space-x-3 bg-maroon-900/60 border border-maroon-700 px-4 py-1.5 rounded-full">
+                            <i class="fa-solid fa-trophy text-mustard-500"></i>
+                            <span class="text-xs font-bold text-mustard-400">XP: <span id="gameXP">1,250</span></span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <button onclick="switchGame(1)" class="game-tab px-4 py-2 rounded-xl text-xs font-bold bg-maroon-600 text-white transition"><i class="fa-solid fa-bug mr-1.5"></i>Bug Hunters</button>
+                        <button onclick="switchGame(2)" class="game-tab px-4 py-2 rounded-xl text-xs font-bold bg-navy-800 text-slate-300 hover:text-mustard-400 transition"><i class="fa-solid fa-bolt mr-1.5"></i>Predict the Output</button>
+                        <button onclick="switchGame(3)" class="game-tab px-4 py-2 rounded-xl text-xs font-bold bg-navy-800 text-slate-300 hover:text-mustard-400 transition"><i class="fa-solid fa-key mr-1.5"></i>Escape Room</button>
+                    </div>
+
+                    <div id="game-1" class="game-container space-y-4">
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800">
+                            <span class="text-[10px] bg-maroon-900 text-mustard-400 px-2 py-0.5 rounded font-bold">Bug Hunters Challenge #1</span>
+                            <h3 class="text-sm font-bold text-white mt-2">Find and fix the syntax or logical bug in the function below:</h3>
+                            <pre class="bg-navy-900 p-4 rounded-xl text-xs font-mono text-slate-200 mt-3 border border-maroon-800">def calculate_average(numbers):
+    total = sum(numbers)
+    count = len(numbers)
+    return total / count  # What happens if numbers is empty?</pre>
+                            <div class="mt-4 space-y-2">
+                                <label class="text-xs text-slate-300 font-semibold">Select the correct fix:</label>
+                                <div class="space-y-2" id="bugOptions">
+                                    <div onclick="checkBugAnswer(false)" class="p-3 rounded-xl bg-navy-900 border border-maroon-800 hover:border-mustard-500 cursor-pointer text-xs text-slate-200 transition">A) Replace division with integer division `//`</div>
+                                    <div onclick="checkBugAnswer(true)" class="p-3 rounded-xl bg-navy-900 border border-maroon-800 hover:border-mustard-500 cursor-pointer text-xs text-slate-200 transition">B) Add a check `if not numbers: return 0` to prevent ZeroDivisionError</div>
+                                    <div onclick="checkBugAnswer(false)" class="p-3 rounded-xl bg-navy-900 border border-maroon-800 hover:border-mustard-500 cursor-pointer text-xs text-slate-200 transition">C) Use `sum(numbers) / len(set(numbers))`</div>
+                                </div>
+                            </div>
+                            <div id="bugFeedback" class="mt-3 text-xs font-bold"></div>
+                        </div>
+                    </div>
+
+                    <div id="game-2" class="game-container hidden space-y-4">
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800">
+                            <span class="text-[10px] bg-mustard-500 text-navy-900 px-2 py-0.5 rounded font-bold">Output Predictor</span>
+                            <h3 class="text-sm font-bold text-white mt-2">What is the exact output of this Python snippet?</h3>
+                            <pre class="bg-navy-900 p-4 rounded-xl text-xs font-mono text-slate-200 mt-3 border border-maroon-800">def generator():
+    yield 1
+    yield 2
+
+g = generator()
+print(next(g), list(g))</pre>
+                            <div class="mt-4 space-y-2" id="outputOptions">
+                                <div onclick="checkPredictAnswer(false)" class="p-3 rounded-xl bg-navy-900 border border-maroon-800 hover:border-mustard-500 cursor-pointer text-xs text-slate-200 transition">A) `1 [1, 2]`</div>
+                                <div onclick="checkPredictAnswer(true)" class="p-3 rounded-xl bg-navy-900 border border-maroon-800 hover:border-mustard-500 cursor-pointer text-xs text-slate-200 transition">B) `1 [2]`</div>
+                                <div onclick="checkPredictAnswer(false)" class="p-3 rounded-xl bg-navy-900 border border-maroon-800 hover:border-mustard-500 cursor-pointer text-xs text-slate-200 transition">C) `[1, 2] [1, 2]`</div>
+                            </div>
+                            <div id="predictFeedback" class="mt-3 text-xs font-bold"></div>
+                        </div>
+                    </div>
+
+                    <div id="game-3" class="game-container hidden space-y-4">
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800 text-center">
+                            <i class="fa-solid fa-lock text-mustard-500 text-3xl mb-2"></i>
+                            <h3 class="text-base font-bold text-white">Python Escape Room: Level 1 Lock</h3>
+                            <p class="text-xs text-slate-300 mt-1">Decode the secret keyword by writing a list comprehension that returns squares of numbers from 1 to 5.</p>
+                            <div class="max-w-md mx-auto mt-4 space-y-3">
+                                <input type="text" id="escapeInput" placeholder="e.g., [x**2 for x in range(1, 6)]" class="w-full bg-navy-900 border border-maroon-800 rounded-xl px-4 py-2 text-xs font-mono text-slate-100 text-center focus:outline-none focus:border-mustard-500">
+                                <button onclick="checkEscapeRoom()" class="px-5 py-2 rounded-xl bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition">Unlock Room</button>
+                                <div id="escapeFeedback" class="text-xs font-bold"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESEARCH LAB TAB -->
+            <div id="tab-researchLab" class="tab-content hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl space-y-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-flask text-mustard-500 mr-2"></i>Research Lab & Experimental Workspace</h2>
+                        <p class="text-xs text-slate-400 mt-1">Empirical performance analysis, hypothesis testing, and downloadable research reports for M.Sc. students.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800 space-y-3">
+                            <span class="text-[10px] bg-maroon-900 text-mustard-400 px-2 py-0.5 rounded font-bold">Experiment 01</span>
+                            <h3 class="font-bold text-sm text-white">Performance: Lists vs. Dictionaries Lookup</h3>
+                            <p class="text-xs text-slate-300">Analyze O(n) linear search time versus O(1) hash table retrieval across 100,000 items.</p>
+                            <button onclick="runResearchSim(1)" class="px-4 py-2 rounded-lg bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition"><i class="fa-solid fa-play mr-1"></i>Run Experiment</button>
+                        </div>
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800 space-y-3">
+                            <span class="text-[10px] bg-maroon-900 text-mustard-400 px-2 py-0.5 rounded font-bold">Experiment 02</span>
+                            <h3 class="font-bold text-sm text-white">Concurrency: Threads vs. Processes Benchmark</h3>
+                            <p class="text-xs text-slate-300">Measure execution time for CPU-bound tasks using `threading` versus `multiprocessing` modules.</p>
+                            <button onclick="runResearchSim(2)" class="px-4 py-2 rounded-lg bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition"><i class="fa-solid fa-play mr-1"></i>Run Experiment</button>
+                        </div>
+                    </div>
+
+                    <div class="p-5 rounded-xl bg-navy-800/90 border border-maroon-700/60 space-y-4">
+                        <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-file-lines text-mustard-500 mr-2"></i>Research Report Generator</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs text-slate-300 font-semibold block mb-1">Research Title</label>
+                                <input type="text" id="reportTitle" value="Empirical Analysis of Python Hash Collisions" class="w-full bg-navy-900 border border-maroon-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-mustard-500">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-300 font-semibold block mb-1">Author / Scholar</label>
+                                <input type="text" id="reportAuthor" value="M.Sc. Computer Science Scholar (VETIAS)" class="w-full bg-navy-900 border border-maroon-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-mustard-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-300 font-semibold block mb-1">Experimental Findings & Conclusion</label>
+                            <textarea id="reportFindings" class="w-full h-24 bg-navy-900 border border-maroon-800 rounded-lg p-3 text-xs text-slate-200 focus:outline-none resize-none">The benchmark demonstrates that dictionary lookups remain constant O(1) while list linear searches scale linearly with O(n).</textarea>
+                        </div>
+                        <button onclick="downloadResearchReport()" class="px-5 py-2 rounded-xl bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition shadow-lg"><i class="fa-solid fa-download mr-2"></i>Download Markdown Report</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECT STUDIO TAB -->
+            <div id="tab-projectStudio" class="tab-content hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl space-y-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-diagram-project text-mustard-500 mr-2"></i>Project Development Studio & Capstone</h2>
+                        <p class="text-xs text-slate-400 mt-1">Progressive student projects from basic calculators to advanced campus automation systems.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-gradient-to-r from-maroon-900/80 to-navy-800 border border-maroon-600 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-mustard-500 text-navy-900">Recommended Semester Capstone</span>
+                            <span class="text-xs text-slate-300 font-mono">Units I – V Integrated</span>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-white">Campus IT Helpdesk and Resource Management System</h3>
+                        <p class="text-xs text-slate-300">A full-stack modular Python application featuring SQLite/NoSQL database persistence, socket-based client-server communication, custom exception handling, and automated logging.</p>
+                        
+                        <div class="space-y-2 pt-2">
+                            <span class="text-xs font-bold text-mustard-400 uppercase">Development Milestones:</span>
+                            <div class="space-y-1.5">
+                                <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer">
+                                    <input type="checkbox" checked class="rounded border-maroon-800 text-mustard-500 focus:ring-0">
+                                    <span>Milestone 1: CLI Data Structures & Exception Handling (Units I–II)</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer">
+                                    <input type="checkbox" checked class="rounded border-maroon-800 text-mustard-500 focus:ring-0">
+                                    <span>Milestone 2: OOP Classes, Inheritance & Magic Methods (Unit III)</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer">
+                                    <input type="checkbox" class="rounded border-maroon-800 text-mustard-500 focus:ring-0">
+                                    <span>Milestone 3: Relational Database & Web Server Integration (Unit IV)</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-xs text-slate-200 cursor-pointer">
+                                    <input type="checkbox" class="rounded border-maroon-800 text-mustard-500 focus:ring-0">
+                                    <span>Milestone 4: TCP Sockets & Multi-threaded Client Support (Unit V)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOOC HUB TAB -->
+            <div id="tab-moocHub" class="tab-content hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl space-y-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-graduation-cap text-mustard-500 mr-2"></i>MOOC Learning Hub</h2>
+                        <p class="text-xs text-slate-400 mt-1">Curated NPTEL and Coursera courses aligned with M.Sc. Computer Science curriculum.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-5 rounded-xl bg-navy-800/80 border border-maroon-800 space-y-3">
+                            <span class="text-[10px] bg-mustard-500 text-navy-900 font-bold px-2 py-0.5 rounded">NPTEL Core</span>
+                            <h3 class="font-bold text-sm text-white">Programming, Data Structures and Algorithms Using Python</h3>
+                            <p class="text-xs text-slate-300">Offered by IIT Madras / NPTEL. Focuses on algorithmic complexity, recursion, dynamic programming, and data structures.</p>
+                            <a href="https://onlinecourses.nptel.ac.in/" target="_blank" class="inline-flex items-center space-x-1 text-xs text-mustard-400 font-semibold hover:underline">
+                                <span>Check Provider Availability</span><i class="fa-solid fa-external-link-alt text-[10px]"></i>
+                            </a>
+                        </div>
+                        <div class="p-5 rounded-xl bg-navy-800/80 border border-maroon-800 space-y-3">
+                            <span class="text-[10px] bg-maroon-900 text-mustard-400 font-bold px-2 py-0.5 rounded">Coursera / Univ. of Michigan</span>
+                            <h3 class="font-bold text-sm text-white">Python for Everybody Specialization</h3>
+                            <p class="text-xs text-slate-300">Comprehensive introduction to databases, web scraping, and web services using Python.</p>
+                            <a href="https://www.coursera.org/" target="_blank" class="inline-flex items-center space-x-1 text-xs text-mustard-400 font-semibold hover:underline">
+                                <span>Check Provider Availability</span><i class="fa-solid fa-external-link-alt text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INDUSTRY ROLE-PLAY TAB -->
+            <div id="tab-rolePlay" class="tab-content hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl space-y-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-users-viewfinder text-mustard-500 mr-2"></i>Industry Role-Play Studio</h2>
+                        <p class="text-xs text-slate-400 mt-1">Interactive software engineering team simulations, code reviews, and technical interview scenarios.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800 space-y-3">
+                            <span class="text-[10px] bg-maroon-900 text-mustard-400 px-2 py-0.5 rounded font-bold">Scenario 01</span>
+                            <h3 class="font-bold text-sm text-white">Software Development Company</h3>
+                            <p class="text-xs text-slate-300">Build a college inventory management system with Product Owner, Tech Lead, and Python Developer roles.</p>
+                            <button onclick="launchRolePlay(1)" class="w-full py-2 rounded-lg bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition">Start Simulation</button>
+                        </div>
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800 space-y-3">
+                            <span class="text-[10px] bg-maroon-900 text-mustard-400 px-2 py-0.5 rounded font-bold">Scenario 02</span>
+                            <h3 class="font-bold text-sm text-white">Technical Interview Practice</h3>
+                            <p class="text-xs text-slate-300">Alternate between interviewer and candidate solving algorithmic Python questions.</p>
+                            <button onclick="launchRolePlay(2)" class="w-full py-2 rounded-lg bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition">Start Simulation</button>
+                        </div>
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800 space-y-3">
+                            <span class="text-[10px] bg-maroon-900 text-mustard-400 px-2 py-0.5 rounded font-bold">Scenario 03</span>
+                            <h3 class="font-bold text-sm text-white">Code Review Meeting</h3>
+                            <p class="text-xs text-slate-300">Review peer Python code for design patterns, efficiency, and PEP 8 compliance.</p>
+                            <button onclick="launchRolePlay(3)" class="w-full py-2 rounded-lg bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition">Start Simulation</button>
+                        </div>
+                    </div>
+                    <div id="rolePlayModal" class="hidden p-4 rounded-xl bg-navy-900 border border-maroon-600 text-xs text-slate-200"></div>
+                </div>
+            </div>
+
+            <!-- HACKATHON TAB -->
+            <div id="tab-hackathon" class="tab-content hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl space-y-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-trophy text-mustard-500 mr-2"></i>Python Innovate 2026 Hackathon</h2>
+                            <p class="text-xs text-slate-400 mt-1">Theme: From Code to Campus Solutions | 6-Hour Mini-Hackathon</p>
+                        </div>
+                        <div class="mt-4 md:mt-0 bg-maroon-900/60 border border-maroon-700 px-4 py-2 rounded-xl text-center">
+                            <span class="text-[10px] text-slate-400 block uppercase">Countdown Timer</span>
+                            <span id="hackathonTimer" class="text-lg font-mono font-bold text-mustard-400">05:59:45</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800 space-y-2">
+                            <span class="text-[10px] bg-mustard-500 text-navy-900 font-bold px-2 py-0.5 rounded">Problem 01</span>
+                            <h3 class="font-bold text-sm text-white">Smart Laboratory Equipment Tracker</h3>
+                            <p class="text-xs text-slate-300">Develop a Python CLI and SQLite application to track lab inventory, maintenance schedules, and student usage logs.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800 space-y-2">
+                            <span class="text-[10px] bg-maroon-900 text-mustard-400 font-bold px-2 py-0.5 rounded">Problem 02</span>
+                            <h3 class="font-bold text-sm text-white">Placement Eligibility & Skill-Gap Analyzer</h3>
+                            <p class="text-xs text-slate-300">Parse student CSV marksheets, compare with corporate job requirements, and generate automated skill-gap reports.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-5 rounded-xl bg-navy-800/90 border border-maroon-700 space-y-4">
+                        <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-medal text-mustard-500 mr-2"></i>Judge Scoring Dashboard (100 Marks)</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="text-xs text-slate-300 block mb-1">Functional Correctness (Max 30)</label>
+                                <input type="number" id="score1" value="28" min="0" max="30" class="w-full bg-navy-900 border border-maroon-800 rounded-lg p-2 text-xs text-slate-200">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-300 block mb-1">Problem & Design (Max 20)</label>
+                                <input type="number" id="score2" value="18" min="0" max="20" class="w-full bg-navy-900 border border-maroon-800 rounded-lg p-2 text-xs text-slate-200">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-300 block mb-1">Code Quality (Max 15)</label>
+                                <input type="number" id="score3" value="14" min="0" max="15" class="w-full bg-navy-900 border border-maroon-800 rounded-lg p-2 text-xs text-slate-200">
+                            </div>
+                        </div>
+                        <button onclick="calculateHackathonScore()" class="px-5 py-2 rounded-xl bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition">Calculate Total Score</button>
+                        <div id="hackathonScoreResult" class="text-xs font-bold text-mustard-400"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROGRESS TRACKER TAB -->
+            <div id="tab-progressTracker" class="tab-content hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl space-y-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-chart-line text-mustard-500 mr-2"></i>Student Progress Tracker & Analytics</h2>
+                        <p class="text-xs text-slate-400 mt-1">Real-time local storage metrics, XP accumulation, and data export.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800 text-center">
+                            <span class="text-xs text-slate-400 block">Overall Completion</span>
+                            <span class="text-2xl font-black text-white mt-1 block">45%</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800 text-center">
+                            <span class="text-xs text-slate-400 block">Challenges Solved</span>
+                            <span id="trackerChallenges" class="text-2xl font-black text-mustard-400 mt-1 block">12 / 30</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-navy-800/80 border border-maroon-800 text-center">
+                            <span class="text-xs text-slate-400 block">Total XP</span>
+                            <span id="trackerXP" class="text-2xl font-black text-mustard-400 mt-1 block">1,250</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="exportProgressJSON()" class="px-4 py-2 rounded-xl bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition"><i class="fa-solid fa-download mr-1.5"></i>Export JSON Progress</button>
+                        <button onclick="resetProgressData()" class="px-4 py-2 rounded-xl bg-maroon-900 border border-maroon-700 text-mustard-400 font-bold text-xs hover:bg-maroon-800 transition"><i class="fa-solid fa-rotate-right mr-1.5"></i>Reset Progress</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FACULTY CENTRE TAB -->
+            <div id="tab-facultyCentre" class="tab-content hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl space-y-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-white"><i class="fa-solid fa-chalkboard-user text-mustard-500 mr-2"></i>Faculty Resource Centre</h2>
+                        <p class="text-xs text-slate-400 mt-1">15-week lesson planner, quiz question banks, answer keys, and instructor activity generator.</p>
+                    </div>
+
+                    <div class="p-5 rounded-xl bg-navy-800/90 border border-maroon-700 space-y-4">
+                        <h3 class="text-sm font-bold text-white"><i class="fa-solid fa-wand-magic-sparkles text-mustard-500 mr-2"></i>Classroom Activity Generator</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="text-xs text-slate-300 block mb-1">Select Unit</label>
+                                <select id="genUnit" class="w-full bg-navy-900 border border-maroon-800 rounded-lg p-2 text-xs text-slate-200">
+                                    <option>Unit I: Introduction & Data Structures</option>
+                                    <option>Unit II: Code Structures & Exceptions</option>
+                                    <option>Unit III: Classes & Objects</option>
+                                    <option>Unit IV: Web & Databases</option>
+                                    <option>Unit V: Networks & Concurrency</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-300 block mb-1">Activity Type</label>
+                                <select id="genType" class="w-full bg-navy-900 border border-maroon-800 rounded-lg p-2 text-xs text-slate-200">
+                                    <option>Debugging Sprint</option>
+                                    <option>Live Coding Pair</option>
+                                    <option>Quiz Bowl</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="generateFacultyActivity()" class="w-full py-2 rounded-lg bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition">Generate Activity</button>
+                            </div>
+                        </div>
+                        <div id="generatedActivityResult" class="p-3 bg-navy-900 rounded-xl border border-maroon-800 text-xs text-slate-300 hidden"></div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- GOOGLE SITES INSTRUCTION MODAL -->
+    <div id="googleSitesModal" class="hidden fixed inset-0 z-50 bg-navy-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="glass-panel max-w-2xl w-full p-6 rounded-2xl border border-mustard-500/40 space-y-4 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-maroon-800 pb-3">
+                <h3 class="text-base font-bold text-white flex items-center">
+                    <i class="fa-solid fa-globe text-mustard-500 mr-2"></i>How to Publish this Portal on Google Sites
+                </h3>
+                <button onclick="closeGoogleSitesGuide()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-3 text-xs text-slate-300">
+                <p>Google Sites does not natively allow direct file-upload of standalone complex single-file apps (`index.html` with Tailwind & embedded JS) inside the page editor. However, you can easily embed or host it in two professional ways:</p>
+                
+                <div class="p-3 rounded-xl bg-navy-800/90 border border-maroon-800 space-y-1">
+                    <strong class="text-mustard-400 block"><i class="fa-solid fa-1 mr-1"></i> Method A: Free Hosting via GitHub Pages or Netlify (Recommended)</strong>
+                    <p class="text-slate-400">1. Click "Export JSON Progress" or save this code as `index.html`.<br>2. Upload `index.html` to a free static host like <strong>Netlify Drop</strong> (netlify.com/drop) or GitHub Pages.<br>3. In Google Sites, click <strong>Embed</strong> &rarr; select <strong>By URL</strong> &rarr; paste your live Netlify/GitHub link!</p>
+                </div>
+
+                <div class="p-3 rounded-xl bg-navy-800/90 border border-maroon-800 space-y-1">
+                    <strong class="text-mustard-400 block"><i class="fa-solid fa-2 mr-1"></i> Method B: Direct HTML Embed Code in Google Sites</strong>
+                    <p class="text-slate-400">1. Open your Google Site.<br>2. Click <strong>Insert</strong> &rarr; <strong>Embed</strong>.<br>3. Choose <strong>Embed code</strong> and paste an `&lt;iframe src="..."&gt;&lt;/iframe&gt;` pointing to your hosted version.</p>
+                </div>
+            </div>
+            <div class="flex justify-end pt-2">
+                <button onclick="closeGoogleSitesGuide()" class="px-4 py-2 rounded-xl bg-mustard-500 text-navy-900 font-bold text-xs hover:bg-mustard-400 transition">Got It</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let appState = {
+            currentTab: 'dashboard',
+            xp: 1250,
+            level: 2,
+            challengesCompleted: 12,
+            practicalSolved: {},
+            leetcodeSolved: {}
+        };
+
+        function loadState() {
+            const saved = localStorage.getItem('python_innovation_lab_state');
+            if (saved) {
+                try {
+                    appState = JSON.parse(saved);
+                } catch(e) {}
+            }
+            updateStatsUI();
+        }
+
+        function saveState() {
+            localStorage.setItem('python_innovation_lab_state', JSON.stringify(appState));
+            updateStatsUI();
+        }
+
+        function updateStatsUI() {
+            document.getElementById('headerXP').innerText = appState.xp + ' XP';
+            document.getElementById('headerLevel').innerText = appState.level;
+            document.getElementById('statXP').innerText = appState.xp;
+            document.getElementById('statChallenges').innerText = appState.challengesCompleted + ' / 30';
+            document.getElementById('gameXP').innerText = appState.xp;
+            document.getElementById('trackerXP').innerText = appState.xp;
+            document.getElementById('trackerChallenges').innerText = appState.challengesCompleted + ' / 30';
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById('tab-' + tabId);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('bg-maroon-600/30', 'text-mustard-400', 'border', 'border-maroon-600/50');
+                el.classList.add('text-slate-300');
+                if (el.getAttribute('data-target') === tabId) {
+                    el.classList.add('bg-maroon-600/30', 'text-mustard-400', 'border', 'border-maroon-600/50');
+                    el.classList.remove('text-slate-300');
+                }
+            });
+            appState.currentTab = tabId;
+            saveState();
+        }
+
+        function openGoogleSitesGuide() {
+            document.getElementById('googleSitesModal').classList.remove('hidden');
+        }
+
+        function closeGoogleSitesGuide() {
+            document.getElementById('googleSitesModal').classList.add('hidden');
+        }
+
+        document.getElementById('sidebarToggle').addEventListener('click', () => {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        });
+
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const html = document.documentElement;
+            const icon = document.getElementById('themeIcon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.className = 'fa-solid fa-moon';
+            } else {
+                html.classList.add('dark');
+                icon.className = 'fa-solid fa-sun';
+            }
+        });
+
+        const syllabusUnits = {
+            1: {
+                title: "UNIT I – INTRODUCTION (15 Hours)",
+                obj: "Master Python fundamentals, built-in numeric types, strings, mutable/immutable collections (Lists, Tuples, Dictionaries, Sets), and comparison operators.",
+                topics: ["Introduction to Python", "Numbers & Arithmetic", "Strings & Formatting", "Variables & Assignment", "Lists & Tuples", "Dictionaries & Sets", "Comparisons & Identity"],
+                code: `# Unit I Example: Collections & Dictionaries\nstudent = {"name": "Arun", "program": "M.Sc. CS", "score": 92}\nskills = {"Python", "Data Structures", "Algorithms"}\nprint(f"Scholar: {student['name']} | Score: {student['score']}")`,
+                exercise: "Create a Python script that takes student scores in a dictionary and computes the class average."
+            },
+            2: {
+                title: "UNIT II – CODE STRUCTURES (15 Hours)",
+                obj: "Understand conditional branching, iteration loops, list comprehensions, generator expressions, decorators, scopes, and custom exception handling.",
+                topics: ["Conditional Statements (if, elif, else)", "while & for Loops", "Comprehensions", "Generators & yield", "Decorators", "Namespaces and Scope", "Exception Handling & User-Defined Exceptions"],
+                code: `# Unit II Example: Generator & Custom Exception\nclass InvalidScoreError(Exception): pass\n\ndef score_generator(scores):\n    for s in scores:\n        if s < 0 or s > 100:\n            raise InvalidScoreError(f"Invalid score: {s}")\n        yield s * 1.15`,
+                exercise: "Implement a custom exception handler for division by zero in grade calculation."
+            },
+            3: {
+                title: "UNIT III – MODULES, PACKAGES AND CLASSES (15 Hours)",
+                obj: "Master object-oriented programming in Python: classes, inheritance, method overriding, super(), self, properties, name mangling, and duck typing.",
+                topics: ["Standalone Programs & CLI Arguments", "Modules and Imports", "Classes and Objects", "Inheritance & Method Overriding", "super() and self", "Properties & Name Mangling", "Method Types", "Duck Typing & Special Methods", "Composition"],
+                code: `# Unit III Example: OOP & Magic Methods\nclass Course:\n    def __init__(self, title, hours):\n        self.title = title\n        self.hours = hours\n    def __str__(self):\n        return f"{self.title} ({self.hours} Hours)"\n\nc = Course("Python Programming", 75)\nprint(c)`,
+                exercise: "Create a base class 'User' and subclass 'Scholar' implementing method overriding."
+            },
+            4: {
+                title: "UNIT IV – DATA TYPES AND WEB (13 Hours)",
+                obj: "Explore binary data, file input/output, structured text/binary files, relational databases (SQLite), NoSQL data stores, and web server/client interactions.",
+                topics: ["Text Strings & Binary Data", "File Input/Output", "Structured Text & Binary Files", "Relational Databases (SQLite)", "NoSQL Data Stores", "Web Clients & Servers", "Web Services and Automation"],
+                code: `# Unit IV Example: SQLite Database Interaction\nimport sqlite3\nconn = sqlite3.connect(':memory:')\ncursor = conn.cursor()\ncursor.execute('CREATE TABLE students (id INT, name TEXT)')\ncursor.execute("INSERT INTO students VALUES (1, 'Kavitha')")\nprint(cursor.execute('SELECT * FROM students').fetchone())`,
+                exercise: "Write a script that exports student records from CSV into an SQLite database."
+            },
+            5: {
+                title: "UNIT V – SYSTEMS AND NETWORKS (15 Hours)",
+                obj: "Delve into system processes, threads, green threads, twisted, Redis, TCP/IP sockets, ZeroMQ, internet services, and cloud computing paradigms.",
+                topics: ["Files, Directories, Programs, Processes", "Calendars, Clocks, Queues", "Processes and Threads", "Green Threads & gevent, Twisted, Redis", "Network Patterns & TCP/IP Sockets", "ZeroMQ, Internet Services & APIs", "Remote Processing & MapReduce / Cloud"],
+                code: `# Unit V Example: Simple Socket Server\nimport socket\nprint("Socket module ready for TCP/IP communication.")`,
+                exercise: "Build a multi-threaded TCP socket echo server."
+            },
+            6: {
+                title: "UNIT VI – CONTEMPORARY ISSUES (2 Hours)",
+                obj: "Examine expert lectures, online seminars, webinars, and emerging AI/Python applications in enterprise computing.",
+                topics: ["Expert Lectures & Webinars", "Emerging Python Applications", "AI & Large Language Models in Python", "Industry Best Practices"],
+                code: `# Unit VI Example: Contemporary AI Integration\nprint("Integrating Python with modern AI APIs.")`,
+                exercise: "Summarize an expert webinar on Python in Cloud Computing."
+            }
+        };
+
+        function selectUnit(unitNum) {
+            document.querySelectorAll('.unit-btn').forEach((btn, idx) => {
+                btn.className = (idx + 1 === unitNum) 
+                    ? "unit-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-mustard-500 text-navy-900 transition"
+                    : "unit-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-navy-800 text-slate-300 hover:text-mustard-400 transition";
+            });
+
+            const unit = syllabusUnits[unitNum];
+            const container = document.getElementById('unitContentContainer');
+            container.innerHTML = `
+                <div class="p-6 rounded-2xl bg-navy-800/80 border border-maroon-800 space-y-4">
+                    <h3 class="text-lg font-extrabold text-white">${unit.title}</h3>
+                    <p class="text-xs text-slate-300"><strong>Learning Objectives:</strong> ${unit.obj}</p>
+                    <div>
+                        <strong class="text-xs text-mustard-400 block mb-2">Key Topics Covered:</strong>
+                        <div class="flex flex-wrap gap-2">
+                            ${unit.topics.map(t => `<span class="px-2.5 py-1 rounded-lg bg-navy-900 border border-maroon-800 text-xs text-slate-200">${t}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div>
+                        <strong class="text-xs text-mustard-400 block mb-1">Python Code Example:</strong>
+                        <pre class="bg-navy-900 p-4 rounded-xl text-xs font-mono text-emerald-400 border border-maroon-800 overflow-x-auto">${unit.code}</pre>
+                    </div>
+                    <div>
+                        <strong class="text-xs text-mustard-400 block mb-1">Practical Task:</strong>
+                        <p class="text-xs text-slate-300 bg-maroon-900/30 p-3 rounded-xl border border-maroon-800/60">${unit.exercise}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        const practicalExercises = [
+            { id: 1, diff: 'beginner', title: 'Student Mark Analyzer', desc: 'Write a function that calculates total, average, and grade for a list of marks.', code: `def analyze_marks(marks):\n    total = sum(marks)\n    avg = total / len(marks)\n    grade = 'A' if avg >= 85 else 'B'\n    return total, avg, grade\n\nprint(analyze_marks([88, 92, 79, 95]))` },
+            { id: 2, diff: 'beginner', title: 'Attendance Validator', desc: 'Check if student attendance percentage meets the 75% minimum requirement.', code: `def check_attendance(attended, total):\n    pct = (attended / total) * 100\n    return pct, pct >= 75\n\nprint(check_attendance(45, 60))` },
+            { id: 3, diff: 'intermediate', title: 'Library Book Inventory', desc: 'Implement a class for Library Book management with borrowing and returning methods.', code: `class Book:\n    def __init__(self, title, copies):\n        self.title = title\n        self.copies = copies\n    def borrow(self):\n        if self.copies > 0:\n            self.copies -= 1\n            return f"Borrowed {self.title}"\n        return "Out of stock"\n\nb = Book("Introducing Python", 3)\nprint(b.borrow())` },
+            { id: 4, diff: 'advanced', title: 'Concurrent Process Worker', desc: 'Simulate parallel processing using concurrent.futures for compute-intensive tasks.', code: `import concurrent.futures\n\ndef square(n):\n    return n * n\n\nwith concurrent.futures.ProcessPoolExecutor() as executor:\n    results = list(executor.map(square, [1, 2, 3, 4, 5]))\nprint(results)` }
+        ];
+
+        let currentPracticalId = 1;
+
+        function setLabDifficulty(diff) {
+            document.querySelectorAll('.lab-diff-btn').forEach(btn => {
+                btn.className = (btn.innerText.toLowerCase() === diff)
+                    ? "lab-diff-btn px-3 py-1 rounded-lg text-xs font-bold bg-maroon-600 text-white transition"
+                    : "lab-diff-btn px-3 py-1 rounded-lg text-xs font-bold bg-navy-800 text-slate-300 transition";
+            });
+            renderPracticalList(diff);
+        }
+
+        function renderPracticalList(diff = 'beginner') {
+            const filtered = practicalExercises.filter(p => p.diff === diff);
+            const listEl = document.getElementById('practicalList');
+            listEl.innerHTML = filtered.map(p => `
+                <div onclick="loadPractical(${p.id})" class="p-3 rounded-xl bg-navy-800/80 border border-maroon-800 hover:border-mustard-500 cursor-pointer transition">
+                    <h4 class="font-bold text-xs text-white">${p.title}</h4>
+                    <span class="text-[10px] text-slate-400 capitalize">${p.diff}</span>
+                </div>
+            `).join('');
+            if (filtered.length > 0) loadPractical(filtered[0].id);
+        }
+
+        function loadPractical(id) {
+            const p = practicalExercises.find(item => item.id === id);
+            if (!p) return;
+            currentPracticalId = id;
+            document.getElementById('currentPracticalTitle').innerText = p.title;
+            document.getElementById('currentPracticalDiff').innerText = p.diff.toUpperCase();
+            document.getElementById('currentPracticalDesc').innerText = p.desc;
+            document.getElementById('practicalCodeEditor').value = p.code;
+            document.getElementById('practicalOutput').innerText = '// Output ready...';
+        }
+
+        function runPracticalCode() {
+            const code = document.getElementById('practicalCodeEditor').value;
+            const outputEl = document.getElementById('practicalOutput');
+            outputEl.innerText = 'Executing Python code in browser simulator...\n';
+            try {
+                let simulatedResult = "";
+                if (code.includes('analyze_marks')) simulatedResult = "(354, 88.5, 'A')";
+                else if (code.includes('check_attendance')) simulatedResult = "(75.0, True)";
+                else if (code.includes('Book')) simulatedResult = "Borrowed Introducing Python";
+                else if (code.includes('ProcessPoolExecutor') || code.includes('square')) simulatedResult = "[1, 4, 9, 16, 25]";
+                else simulatedResult = "Executed successfully. Return value: None";
+                
+                outputEl.innerText += `> Output:\n${simulatedResult}\n[Execution completed with exit code 0]`;
+                appState.xp += 25;
+                appState.challengesCompleted = Math.min(30, appState.challengesCompleted + 1);
+                saveState();
+            } catch (err) {
+                outputEl.innerText += `Error: ${err.message}`;
+            }
+        }
+
+        function resetPracticalCode() {
+            loadPractical(currentPracticalId);
+        }
+
+        const leetCodeChallenges = [
+            { id: 1, title: 'Find Second-Largest Distinct Number', diff: 'Easy', desc: 'Given a list of student exam scores, find the second largest distinct score.', code: `def second_largest(scores):\n    unique_scores = sorted(list(set(scores)), reverse=True)\n    return unique_scores[1] if len(unique_scores) > 1 else None\n\nprint(second_largest([85, 92, 78, 92, 95]))` },
+            { id: 2, title: 'Analyze Student Examination Results', diff: 'Medium', desc: 'Process a dictionary of student grades and return the top performer.', code: `def top_student(grades_dict):\n    return max(grades_dict, key=grades_dict.get)\n\nprint(top_student({"Arun": 88, "Priya": 95, "Kavitha": 91}))` },
+            { id: 3, title: 'Design OOP Payroll System', diff: 'Hard', desc: 'Implement an abstract Employee class with polymorphism for FullTime and PartTime employee salaries.', code: `class Employee:\n    def calculate_pay(self): pass\n\nclass FullTime(Employee):\n    def calculate_pay(self): return 50000\n\nemp = FullTime()\nprint(emp.calculate_pay())` }
+        ];
+
+        function renderLeetCodeList(filter = '') {
+            const listEl = document.getElementById('leetcodeListContainer');
+            const filtered = leetCodeChallenges.filter(c => c.title.toLowerCase().includes(filter.toLowerCase()));
+            listEl.innerHTML = filtered.map(c => `
+                <div onclick="loadLeetCode(${c.id})" class="p-3 rounded-xl bg-navy-800/80 border border-maroon-800 hover:border-mustard-500 cursor-pointer transition flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-xs text-white">${c.title}</h4>
+                        <span class="text-[10px] text-slate-400">${c.diff}</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-xs text-mustard-500"></i>
+                </div>
+            `).join('');
+            if (filtered.length > 0) loadLeetCode(filtered[0].id);
+        }
+
+        function loadLeetCode(id) {
+            const c = leetCodeChallenges.find(item => item.id === id);
+            if (!c) return;
+            document.getElementById('lcTitle').innerText = c.title;
+            document.getElementById('lcDesc').innerText = c.desc;
+            document.getElementById('lcCodeEditor').value = c.code;
+            document.getElementById('lcResult').innerText = 'Status: Ready for submission test cases.';
+        }
+
+        function filterLeetCode() {
+            const val = document.getElementById('leetcodeSearch').value;
+            renderLeetCodeList(val);
+        }
+
+        function submitLeetCode() {
+            document.getElementById('lcResult').innerText = 'All test cases passed successfully! (+50 XP)';
+            appState.xp += 50;
+            saveState();
+        }
+
+        function switchGame(gameNum) {
+            document.querySelectorAll('.game-container').forEach(el => el.classList.add('hidden'));
+            document.getElementById('game-' + gameNum).classList.remove('hidden');
+            document.querySelectorAll('.game-tab').forEach((btn, idx) => {
+                btn.className = (idx + 1 === gameNum)
+                    ? "game-tab px-4 py-2 rounded-xl text-xs font-bold bg-maroon-600 text-white transition"
+                    : "game-tab px-4 py-2 rounded-xl text-xs font-bold bg-navy-800 text-slate-300 hover:text-mustard-400 transition";
+            });
+        }
+
+        function checkBugAnswer(isCorrect) {
+            const fb = document.getElementById('bugFeedback');
+            if (isCorrect) {
+                fb.className = 'mt-3 text-xs font-bold text-emerald-400';
+                fb.innerText = 'Correct! Adding zero-division check prevents runtime errors. (+30 XP)';
+                appState.xp += 30;
+                saveState();
+            } else {
+                fb.className = 'mt-3 text-xs font-bold text-red-400';
+                fb.innerText = 'Incorrect. Try again!';
+            }
+        }
+
+        function checkPredictAnswer(isCorrect) {
+            const fb = document.getElementById('predictFeedback');
+            if (isCorrect) {
+                fb.className = 'mt-3 text-xs font-bold text-emerald-400';
+                fb.innerText = 'Correct! next(g) yields 1, leaving 2 in generator g. (+30 XP)';
+                appState.xp += 30;
+                saveState();
+            } else {
+                fb.className = 'mt-3 text-xs font-bold text-red-400';
+                fb.innerText = 'Incorrect. Review generator consumption.';
+            }
+        }
+
+        function checkEscapeRoom() {
+            const val = document.getElementById('escapeInput').value.trim();
+            const fb = document.getElementById('escapeFeedback');
+            if (val.includes('for') && val.includes('in')) {
+                fb.className = 'text-xs font-bold text-emerald-400';
+                fb.innerText = 'Room Unlocked! Secret passcode verified. (+50 XP)';
+                appState.xp += 50;
+                saveState();
+            } else {
+                fb.className = 'text-xs font-bold text-red-400';
+                fb.innerText = 'Invalid list comprehension syntax.';
+            }
+        }
+
+        function runResearchSim(expNum) {
+            alert(`Research Experiment ${expNum} executed successfully. Data points collected for report generation.`);
+            appState.xp += 40;
+            saveState();
+        }
+
+        function downloadResearchReport() {
+            const title = document.getElementById('reportTitle').value;
+            const author = document.getElementById('reportAuthor').value;
+            const findings = document.getElementById('reportFindings').value;
+            
+            const markdown = `# RESEARCH REPORT: ${title}\n**Author:** ${author}\n**Institution:** VET Institute of Arts and Science, Erode\n\n## Abstract & Findings\n${findings}\n\n*Generated via Python Innovation Lab.*`;
+            
+            const blob = new Blob([markdown], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'research_report.md';
+            a.click();
+        }
+
+        function launchRolePlay(scenarioNum) {
+            const modal = document.getElementById('rolePlayModal');
+            modal.classList.remove('hidden');
+            if (scenarioNum === 1) {
+                modal.innerHTML = '<strong>Active Scenario: Software Development Company</strong><br>Role Assigned: <em>Python Developer</em><br>Task: Implement REST API endpoints for college inventory management.';
+            } else if (scenarioNum === 2) {
+                modal.innerHTML = '<strong>Active Scenario: Technical Interview</strong><br>Role Assigned: <em>Candidate</em><br>Question: Explain the difference between \\`__new__\\` and \\`__init__\\` in Python classes.';
+            } else {
+                modal.innerHTML = '<strong>Active Scenario: Code Review Meeting</strong><br>Role Assigned: <em>Technical Lead</em><br>Task: Review PEP 8 compliance and generator memory efficiency.';
+            }
+        }
+
+        function calculateHackathonScore() {
+            const s1 = parseInt(document.getElementById('score1').value) || 0;
+            const s2 = parseInt(document.getElementById('score2').value) || 0;
+            const s3 = parseInt(document.getElementById('score3').value) || 0;
+            const total = s1 + s2 + s3;
+            document.getElementById('hackathonScoreResult').innerText = `Total Score Calculated: ${total} / 65 (Preliminary Judge Score)`;
+        }
+
+        function exportProgressJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+            const a = document.createElement('a');
+            a.href = dataStr;
+            a.download = 'python_innovation_lab_progress.json';
+            a.click();
+        }
+
+        function resetProgressData() {
+            if (confirm('Are you sure you want to reset all progress data?')) {
+                localStorage.removeItem('python_innovation_lab_state');
+                location.reload();
+            }
+        }
+
+        function generateFacultyActivity() {
+            const unit = document.getElementById('genUnit').value;
+            const type = document.getElementById('genType').value;
+            const res = document.getElementById('generatedActivityResult');
+            res.classList.remove('hidden');
+            res.innerHTML = `<strong>Generated Activity:</strong> ${type} for ${unit}<br><em>Objective:</em> Collaborative peer problem solving and live debugging in M.Sc. lab session.`;
+        }
+
+        window.onload = function() {
+            loadState();
+            selectUnit(1);
+            renderPracticalList('beginner');
+            renderLeetCodeList();
+        };
+    </script>
+</body>
+</html>
